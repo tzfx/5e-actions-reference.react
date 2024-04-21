@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    env:
+      NODE_VERSION: 20
+    steps:
+      - name: setup nvm
+        run: |
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+          nvm install $NODE_VERSION
+          nvm alias default $NODE_VERSION
+          node --version
+      - uses: actions/checkout@v4
+      - name: build
+        run: npm ci && npm run build
+
