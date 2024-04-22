@@ -15,8 +15,8 @@ function ActionElement({ action }: Props) {
           {action.name}
         </h2>
         {action.time &&
-          action.time.map((t) => (
-            <small style={{ alignSelf: "end" }}>
+          action.time.map((t, i) => (
+            <small key={i} style={{ alignSelf: "end" }}>
               {typeof t === "string" ? t : [t.number, t.unit].join(" ")}
             </small>
           ))}
